@@ -194,7 +194,7 @@ class ManagerYandexGPT:
                 ]
             }
 
-            response = requests.post(YANDEX_GPT_URL, headers=headers, json=promt)
+            response = requests.post(YANDEX_GPT_URL, headers=headers, json=promt, timeout=60)
             result = response.text
             print(result)
             return result, False
