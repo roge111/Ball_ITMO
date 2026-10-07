@@ -46,10 +46,13 @@ MAIN_ADMIN_ID = int(os.getenv('MAIN_ADMIN_ID'))
 CHANNEL_ID = int(os.getenv('CHANNEL_ID'))
 
 # === Прокси для Vependo ===
-PROXY_URL = os.getenv('PROXY_URL', 'socks5://127.0.0.1:10801')
+PROXY_URL = os.getenv('PROXY_URL')
 
-session = AiohttpSession(proxy=PROXY_URL)
-bot = Bot(token=TG_TOKEN, session=session)
+if PROXY_URL:
+    session = AiohttpSession(proxy=PROXY_URL)
+    bot = Bot(token=TG_TOKEN, session=session)
+else:
+    bot = Bot(token=TG_TOKEN)
 dp = Dispatcher()
 db = DataBaseManager()
 readInfo = ReadInfo()
