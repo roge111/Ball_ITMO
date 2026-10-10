@@ -181,7 +181,7 @@ class ManagerYandexGPT:
                 )
 
             
-            equest
+            print(system_with_resume)
             
             promt = {
                 "modelUri": "gpt://b1gmotqp93hmcr4jnin8/yandexgpt",
