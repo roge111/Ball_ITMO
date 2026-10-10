@@ -183,7 +183,7 @@ class ManagerYandexGPT:
 
             
             print(system_with_resume)
-            print(summary, len(system_with_resume))
+            print(len(system_with_resume.replace(' ', '').replace('\n', '')))
             
             promt = {
                 "modelUri": "gpt://b1gmotqp93hmcr4jnin8/yandexgpt",
