@@ -190,7 +190,7 @@ class ManagerYandexGPT:
                 "completionOptions": {
                     "stream": False,
                     "temperature": 0.6,
-                    "maxTokens": "2000",
+                    "maxTokens": "4000",
                     "reasoningOptions": {
                         "mode": "DISABLED"
                     }
