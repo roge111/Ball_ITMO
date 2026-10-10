@@ -198,7 +198,7 @@ class ManagerYandexGPT:
                 "messages": [
                     {
                         "role": "system",
-                        "text": system_with_resume
+                        "text": system_with_resume.replace(' ', '').replace('\n', '')
                     },
                     {
                         "role": "user",
