@@ -160,7 +160,7 @@ class ManagerYandexGPT:
             }
 
             system_with_resume = (
-                system_message
+                re.sub(r'\b[A-Za-z]+\d+\b', '', system_message.replace(' ', '').replace('\n', ''))
                 + "\n\nВАЖНО: в самом конце ответа, ПОСЛЕ основного текста, добавь ровно одну строку:\n"
                 + "resume: {краткий конспект диалога, 3-4 предложения}\n"
                 + "Требования к resume: с фигурными скобкам вкоруг сути;"
