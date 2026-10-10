@@ -167,7 +167,7 @@ class ManagerYandexGPT:
                     + "Требования к resume: с фигурными скобкам вкоруг сути;"
                     + "пользователь и что обсудили; без пояснений и мета-текста." 
                     + "ограничивай символами не больше 50, чтобы следующие запросы выполнялись\n" 
-                    + f" Вот тебе контекст прошлого диалога: {self._get_summary()}"
+                    + f" Вот тебе контекст прошлого диалога: {summary}"
                     
                 )
             else:
@@ -183,6 +183,7 @@ class ManagerYandexGPT:
 
             
             print(system_with_resume)
+            print(summary, len(system_with_resume))
             
             promt = {
                 "modelUri": "gpt://b1gmotqp93hmcr4jnin8/yandexgpt",
