@@ -199,7 +199,7 @@ class ManagerYandexGPT:
                 "messages": [
                     {
                         "role": "system",
-                        "text": system_with_resume.replace(' ', '').replace('\n', '') + 'Отвечай быстро, можешь использовать и из интернета. Добавь в ответе: для резюме диалога по теме напипшите, например: "О чем мы говорили ?' 
+                        "text": system_with_resume.replace(' ', '').replace('\n', '') + 'Отвечай быстро, можешь использовать и из интернета.' 
                     },
                     {
                         "role": "user",
