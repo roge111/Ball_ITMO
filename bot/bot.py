@@ -190,7 +190,7 @@ async def add_gender(message: types.Message, state: FSMContext):
         except Exception as e:
             await message.answer(f"Ошибка: {e}")
             await bot.send_message(chat_id=MAIN_ADMIN_ID, text=f"При регистрации произошла ошибка: {e}")
-            await message.answer(f"Ручки моего разработчика уже все чинят!")
+            await message.answer(f"Ручки моего разработчика уже все чинят!  Повторите запрос или напишите в поддержк")
         if message.from_user.id in ADMINS_LIST:
             await message.answer("Главное меню", reply_markup=main_menu_admin())
         else:
@@ -278,7 +278,7 @@ async def process_support(message: types.Message, state: FSMContext):
 
     except Exception as e:
         await bot.send_message(chat_id=MAIN_ADMIN_ID, text=f"При отправке обращения произошла ошибка: {e}")
-        await message.answer("Произошла ошибка. Ручки разработчика уже работают) Обратитесь позже.")
+        await message.answer("Произошла ошибка. Ручки разработчика уже работают)  Повторите запрос или напишите в поддержк")
 
     await handle_menu_return(message, state)
 
@@ -362,7 +362,7 @@ async def process_gpt(message: types.Message, state: FSMContext):
                 )
                 result, err = res[0], res[1]
                 if not len(result) or err:
-                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют)")
+                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют) Повторите запрос или напишите в поддержку")
                     await bot.send_message(chat_id=MAIN_ADMIN_ID, text=f"На вопрос '{message_user}' пришел пустой ответ.")
                 else:
                     response = yaGPT.parser_response_gpt(result)
@@ -404,7 +404,7 @@ async def process_gpt_history(message: types.Message, state: FSMContext):
                 )
                 result, err = res[0], res[1]
                 if not len(result) or err:
-                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют)")
+                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют)  Повторите запрос или напишите в поддержк")
                     await bot.send_message(chat_id=MAIN_ADMIN_ID, text=f"На вопрос '{message_user}' пришел пустой ответ.")
                 else:
                     response = yaGPT.parser_response_gpt(result)
@@ -446,7 +446,7 @@ async def process_gpt_music(message: types.Message, state: FSMContext):
                 )
                 result, err = res[0], res[1]
                 if not len(result) or err:
-                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют)")
+                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют  Повторите запрос или напишите в поддержк)")
                     await bot.send_message(chat_id=MAIN_ADMIN_ID, text=f"На вопрос '{message_user}' пришел пустой ответ.")
                 else:
                     response = yaGPT.parser_response_gpt(result)
@@ -488,7 +488,7 @@ async def process_gpt_talk(message: types.Message, state: FSMContext):
                 )
                 result, err = res[0], res[1]
                 if not len(result) or err:
-                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют)")
+                    await message.reply("❌Произошла ошибка. Ручки разработчика уже потеют)  Повторите запрос или напишите в поддержк")
                     await bot.send_message(chat_id=MAIN_ADMIN_ID, text=f"На вопрос '{message_user}' пришел пустой ответ.")
                 else:
                     response = yaGPT.parser_response_gpt(result)
