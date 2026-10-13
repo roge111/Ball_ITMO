@@ -198,11 +198,11 @@ class ManagerYandexGPT:
                 "messages": [
                     {
                         "role": "system",
-                        "text": system_with_resume.replace(' ', '').replace('\n', '')
+                        "text": system_with_resume.replace(' ', '').replace('\n', '') 
                     },
                     {
                         "role": "user",
-                        "text": request
+                        "text": request + 'Кратко'
                     }
                 ]
             }
