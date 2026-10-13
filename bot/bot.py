@@ -342,7 +342,8 @@ async def process_gpt(message: types.Message, state: FSMContext):
             if len(gender):
                 gender = gender[0][0]
                 if gender == 'М':
-                    system_message = readInfo.read_pdf_info('info/Дресс-код_для_кавалеров.pdf')
+                    with open('info/dresscode_cavaliers.txt', 'r', encoding='utf-8') as f:
+                        system_message = f.read()
                 else:
                     system_message = readInfo.read_pdf_info('info/Дресс-код_для_дам.pdf')
 

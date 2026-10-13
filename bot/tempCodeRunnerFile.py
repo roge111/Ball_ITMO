@@ -1,2 +1,1 @@
-
-print(db.query_database("select * from chat_sessions"))
+os.getenv('название переменной из файла .env')

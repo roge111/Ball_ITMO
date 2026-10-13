@@ -1,4 +1,4 @@
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
 import psycopg2
 import os
 from psycopg2 import OperationalError, InterfaceError, DatabaseError
@@ -16,7 +16,7 @@ class DataBaseManager:
 
     def _connect(self):
         try:
-            print(os.getenv('DB_NAME'))
+            
             connect = psycopg2.connect(
                 host=os.getenv('HOST_DB'),
                 port=os.getenv('PORT_DB'),
