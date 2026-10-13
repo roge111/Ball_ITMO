@@ -9,6 +9,7 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
 from managers.ReadInfo import ReadInfo
+from managers.logger import log
 read_info = ReadInfo()
 
-print(re.sub(r'\b[A-Za-z]+\d+\b', '', read_info.read_pdf_info('info/Дресс-код_для_кавалеров.pdf').replace(' ', '').replace('\n', '')))
+log("main", re.sub(r'\b[A-Za-z]+\d+\b', '', read_info.read_pdf_info('info/Дресс-код_для_кавалеров.pdf').replace(' ', '').replace('\n', '')))

@@ -7,6 +7,8 @@ ROOT = Path(__file__).parent.parent
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
+from managers.logger import log
+
 class ReadInfo:
     def __init__(self):
         pass
@@ -36,7 +38,7 @@ class ReadInfo:
         else:
             absolute_path = Path(path)
         
-        print(f"Пытаюсь открыть файл: {absolute_path}")  # Отладочная информация
+        log("ReadInfo", f"Пытаюсь открыть файл: {absolute_path}")  # Отладочная информация
         
         # Проверяем существование файла
         if not absolute_path.exists():

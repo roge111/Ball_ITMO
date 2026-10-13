@@ -1,7 +1,8 @@
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
 import psycopg2
 import os
 from psycopg2 import OperationalError, InterfaceError, DatabaseError
+from managers.logger import log
 
 load_dotenv()
 
@@ -11,7 +12,7 @@ class DataBaseManager:
         try:
             self.connection = self._connect()
         except Exception as e:
-            print(f"Ошибка при подключении к БД: {e}")
+            log("dataBase", f"Ошибка при подключении к БД: {e}")
             raise  # Пробрасываем исключение дальше для обработки на уровне приложения
 
     def _connect(self):
@@ -26,13 +27,13 @@ class DataBaseManager:
                 client_encoding=os.getenv('CLIENT_ENCODING_DB')
                 
             )
-            print("Успешное подключение к БД")
+            log("dataBase", "Успешное подключение к БД")
             return connect
         except OperationalError as e:
-            print(f"Ошибка подключения к серверу БД: {e}")
+            log("dataBase", f"Ошибка подключения к серверу БД: {e}")
             raise
         except Exception as e:
-            print(f"Неизвестная ошибка при подключении: {e}")
+            log("dataBase", f"Неизвестная ошибка при подключении: {e}")
             raise
 
     def query_database(self, query, params=None, fetch_one=False, reg=False):
@@ -56,11 +57,11 @@ class DataBaseManager:
             return None
             
         except (OperationalError, InterfaceError) as e:
-            print(f"Ошибка выполнения запроса: {e}")
+            log("dataBase", f"Ошибка выполнения запроса: {e}")
             self.connection.rollback()
             raise
         except Exception as e:
-            print(f"Неизвестная ошибка при выполнении запроса: {e}")
+            log("dataBase", f"Неизвестная ошибка при выполнении запроса: {e}")
             self.connection.rollback()
             raise
         finally:
@@ -71,9 +72,9 @@ class DataBaseManager:
         try:
             if self.connection and not self.connection.closed:
                 self.connection.close()
-                print("Соединение с БД закрыто")
+                log("dataBase", "Соединение с БД закрыто")
         except Exception as e:
-            print(f"Ошибка при закрытии соединения: {e}")
+            log("dataBase", f"Ошибка при закрытии соединения: {e}")
             raise
 
     def __enter__(self):

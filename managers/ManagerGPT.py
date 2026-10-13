@@ -1,6 +1,7 @@
 import json
 import re
 from managers.dataBase import DataBaseManager
+from managers.logger import log
 from dotenv import load_dotenv
 from datetime import datetime
 
@@ -76,7 +77,7 @@ class ManagerYandexGPT:
             try:
                 self._save_resume(self._current_tg_id, self._current_topic, resume)
             except Exception as e:
-                print(f"[parser_response_gpt] Не удалось сохранить resume: {e}")
+                log("ManagerGPT", f"[parser_response_gpt] Не удалось сохранить resume: {e}")
 
         return answer
     def _get_summary(self):
@@ -93,7 +94,7 @@ class ManagerYandexGPT:
             if row and row[0][0]:
                 return row[0][0]
         except Exception as e:
-            print(f"[_get_summary] {e}")
+            log("ManagerGPT", f"[_get_summary] {e}")
         return ""
 
 
@@ -148,7 +149,7 @@ class ManagerYandexGPT:
                 "INSERT INTO chat_sessions (user_id, topic, summary) VALUES (%s, %s, %s)",
                 (user_id, topic, resume), reg=True
             )
-            print("вставлено")
+            log("ManagerGPT", "вставлено")
 
 
     
@@ -182,8 +183,8 @@ class ManagerYandexGPT:
                 )
 
             
-            print(system_with_resume)
-            print(len(system_with_resume.replace(' ', '').replace('\n', '')))
+            log("ManagerGPT", system_with_resume)
+            log("ManagerGPT", len(system_with_resume.replace(' ', '').replace('\n', '')))
             
             promt = {
                 "modelUri": "gpt://b1gmotqp93hmcr4jnin8/yandexgpt",
@@ -198,7 +199,7 @@ class ManagerYandexGPT:
                 "messages": [
                     {
                         "role": "system",
-                        "text": system_with_resume.replace(' ', '').replace('\n', '') + 'Добавь в ответе: для резюме диалога по теме напипшите, например: "О чем мы говорили ?' 
+                        "text": system_with_resume.replace(' ', '').replace('\n', '') + 'Отвечай быстро, можешь использовать и из интернета. Добавь в ответе: для резюме диалога по теме напипшите, например: "О чем мы говорили ?' 
                     },
                     {
                         "role": "user",
@@ -209,7 +210,7 @@ class ManagerYandexGPT:
 
             response = requests.post(YANDEX_GPT_URL, headers=headers, json=promt, timeout=60)
             result = response.text
-            print(result)
+            log("ManagerGPT", result)
             return result, False
         except Exception as e:
             return f"❌ Ошибка при исполнении: {e}. Передайте ее в /support. ", True

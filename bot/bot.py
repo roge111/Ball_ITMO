@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 from managers.dataBase import DataBaseManager
 from managers.ReadInfo import ReadInfo
 from managers.ManagerGPT import ManagerYandexGPT
+from managers.logger import log
 
 import shutil
 from datetime import datetime
@@ -96,7 +97,7 @@ def get_unanswered_questions():
     try:
         return db.query_database(query)
     except Exception as e:
-        print(f"Ошибка при получении вопросов: {e}")
+        log("bot", f"Ошибка при получении вопросов: {e}")
         return []
 
 
@@ -112,7 +113,7 @@ def get_summary(tg_id: int, topic: str) -> str:
         if row and row[0][0]:
             return row[0][0]
     except Exception as e:
-        print(f"[get_summary] {e}")
+        log("bot", f"[get_summary] {e}")
     return ""
 
 
@@ -535,7 +536,7 @@ async def get_chat_id(message: types.Message):
     chat_type = message.chat.type
     chat_title = message.chat.title or "Без названия"
 
-    print(chat_id)
+    log("bot", chat_id)
     await message.answer(
         f"🆔 ID: `{chat_id}`\n📝 Тип: {chat_type}\n👥 Название: {chat_title}",
         parse_mode="Markdown"
@@ -551,7 +552,7 @@ async def process_ask_question(message: types.Message, state: FSMContext):
         res = db.query_database(
             f"select q.is_ask, users.tg_id, q.operator from questions as q join users on q.user_id = users.user_id where q.id = {id_question};"
         )
-        print(res)
+        log("bot", res)
         if len(res):
             is_ask, tg_id, operator = res[0][0], res[0][1], res[0][2]
 

@@ -16,10 +16,11 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
 from managers.dataBase import DataBaseManager
+from managers.logger import log
 
 
 
 db = DataBaseManager()
 
 
-print(db.query_database("select * from chat_sessions"))
+log("create_table", db.query_database("select * from chat_sessions"))
