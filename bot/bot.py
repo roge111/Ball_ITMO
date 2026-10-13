@@ -345,7 +345,8 @@ async def process_gpt(message: types.Message, state: FSMContext):
                     with open('info/dresscode_cavaliers.txt', 'r', encoding='utf-8') as f:
                         system_message = f.read()
                 else:
-                    system_message = readInfo.read_pdf_info('info/Дресс-код_для_дам.pdf')
+                    with open('info/dresscode_dam.txt', 'r', encoding='utf-8') as f:
+                        system_message = f.read()
 
                 summary = get_summary(message.from_user.id, 'dresscode')
                 request_text = message_user
@@ -386,7 +387,8 @@ async def process_gpt_history(message: types.Message, state: FSMContext):
             gender = db.query_database(f'select gender from users where tg_id = {message.from_user.id};')
             if len(gender):
                 gender = gender[0][0]
-                system_message = readInfo.read_pdf_info('info/МАБ_История_Балов_ШСЭ.pdf') + '\n'
+                with open('info/history.txt', 'r', encoding='utf-8') as f:
+                                        system_message = f.read()
 
                 summary = get_summary(message.from_user.id, 'history')
                 request_text = message_user
@@ -427,7 +429,8 @@ async def process_gpt_music(message: types.Message, state: FSMContext):
             gender = db.query_database(f'select gender from users where tg_id = {message.from_user.id};')
             if len(gender):
                 gender = gender[0][0]
-                system_message = readInfo.read_pdf_info('info/МАБ_Классическая_музыкальная_традиция_ШСЭ.pdf') + '\n'
+                with open('info/music.txt', 'r', encoding='utf-8') as f:
+                    system_message = f.read()
 
                 summary = get_summary(message.from_user.id, 'music')
                 request_text = message_user
@@ -468,7 +471,8 @@ async def process_gpt_talk(message: types.Message, state: FSMContext):
             gender = db.query_database(f'select gender from users where tg_id = {message.from_user.id};')
             if len(gender):
                 gender = gender[0][0]
-                system_message = readInfo.read_pdf_info('info/МАБ_Речевой_общ_цифровой_ШСЭ.pdf') + '\n'
+                with open('info/talk.txt', 'r', encoding='utf-8') as f:
+                    system_message = f.read()
 
                 summary = get_summary(message.from_user.id, 'talk')
                 request_text = message_user
