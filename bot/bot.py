@@ -125,7 +125,7 @@ def main_menu():
         InlineKeyboardButton(text="🎵 Задать вопрос в бот по музыке бала", callback_data="ask_gpt_music"),
         InlineKeyboardButton(text="🏛️ Задать вопрос в бот по истории бала", callback_data="ask_gpt_history"),
         InlineKeyboardButton(text="🤖 Задать вопрос в бот по разговорному этикету", callback_data="ask_gpt_talk"),
-        InlineKeyboardButton(text="🖊️ Написать в поддержку", callback_data="support"),
+        InlineKeyboardButton(text="🖊️ Написать в поддержку (с фото только сюда)", callback_data="support"),
     )
     builder.adjust(1)
     return builder.as_markup()
